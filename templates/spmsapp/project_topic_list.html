@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Topics</title>
+</head>
+<body>
+<h2>Project Topics</h2>
+<ul>
+  {% for topic in project_topics %}
+  <li>{{ topic.name }}</li>
+  {% empty %}
+  <li>No project topics available.</li>
+  {% endfor %}
+</ul>
+
+</br>
+</br>
+
+<!-- Display the "Register a Topic" button only if the user has a supervisor or administrator role -->
+{% if user.role in ['supervisor', 'administrator'] %}
+<a href="{% url 'spmsapp:register_project_topic' %}" class="btn btn-primary">Register a Project Topic</a>
+{% endif %}
+
+</br>
+</br>
+<!-- Button to go back to the dashboard -->
+<a href="{% url 'register:dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
+
+</body>
+</html>

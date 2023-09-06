@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register Project Topic</title>
+</head>
+<body>
+<h2>Register Project Topic</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Register</button>
+</form>
+</br>
+</br>
+<a href="{% url 'spmsapp:project_topic_list' %}">View All Project Topics</a>
+</br>
+</br>
+<!-- Button to go back to the dashboard -->
+<a href="{% url 'register:dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
+</body>
+</html>

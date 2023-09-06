@@ -20,4 +20,5 @@ from django.urls import path, include  # Import the include function
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', include('register.urls')),  # Include the URLs from the register app
+    path('spmsapp/', include('spmsapp.urls')),  # Include the URLs from the spmsapp app
 ]
