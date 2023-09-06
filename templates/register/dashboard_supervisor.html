@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supervisor Dashboard</title>
+</head>
+<body>
+<h2>Welcome, {{ request.user.username }}!</h2>
+<p>Your role is: Supervisor</p>
+
+<!-- Other content specific to supervisors -->
+
+<form method="post" action="{% url 'register:logout' %}">
+    {% csrf_token %}
+    <input type="submit" value="Logout">
+</form>
+
+</br>
+</br>
+
+<!--Register Project Topics -->
+<a href="{% url 'spmsapp:register_project_topic' %}">Register a Project Topic</a>
+</br>
+</br>
+<!--View Existing Project Topics -->
+<a href="{% url 'spmsapp:project_topic_list' %}">View All Project Topics</a>
+
+
+<!--Proof that Registration button displays only for administrator accounts-->
+<!--</br>-->
+<!--</br>-->
+
+<!--{% if request.user.role == 'administrator' %}-->
+<!--<a href="{% url 'register:registration' %}" class="btn btn-primary">Register Users</a>-->
+<!--{% endif %}-->
+
+
+</body>
+</html>

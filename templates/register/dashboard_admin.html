@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>Administrator Dashboard</title>
+</head>
+<body>
+<h2>Welcome, {{ request.user.username }}!</h2>
+<p>Your role is: Administrator</p>
+
+<!-- Other content specific to administrators -->
+
+<form method="post" action="{% url 'register:logout' %}">
+  {% csrf_token %}
+  <input type="submit" value="Logout">
+</form>
+
+</br>
+</br>
+
+<!--Registration button displays only with Administrators -->
+{% if request.user.role == 'administrator' %}
+<a href="{% url 'register:registration' %}" class="btn btn-primary">Register Users</a>
+{% endif %}
+
+</br>
+</br>
+
+<!--Register Project Topics -->
+<a href="{% url 'spmsapp:register_project_topic' %}">Register a Project Topic</a>
+</br>
+</br>
+<!--View Existing Project Topics -->
+<a href="{% url 'spmsapp:project_topic_list' %}">View All Project Topics</a>
+
+
+</body>
+</html>

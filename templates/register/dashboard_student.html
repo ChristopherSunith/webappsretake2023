@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+</head>
+<body>
+<h2>Welcome, {{ request.user.username }}!</h2>
+<p>Your role is: Student</p>
+
+<!-- Other content specific to students -->
+
+</br>
+</br>
+<!--View Existing Project Topics -->
+<a href="{% url 'spmsapp:project_topic_list' %}">View All Project Topics</a>
+</br>
+</br>
+
+<form method="post" action="{% url 'register:logout' %}">
+    {% csrf_token %}
+    <input type="submit" value="Logout">
+</form>
+
+<!--Proof that Registration button displays only for administrator accounts-->
+<!--</br>-->
+<!--</br>-->
+
+<!--{% if request.user.role == 'administrator' %}-->
+<!--<a href="{% url 'register:registration' %}" class="btn btn-primary">Register Users</a>-->
+<!--{% endif %}-->
+
+
+</body>
+</html>
