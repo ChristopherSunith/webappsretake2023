@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include  # Import the include function
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='spmsapp/home.html'), name='home'),
     path('admin/', admin.site.urls),
     path('register/', include('register.urls')),  # Include the URLs from the register app
     path('spmsapp/', include('spmsapp.urls')),  # Include the URLs from the spmsapp app

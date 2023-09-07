@@ -17,8 +17,8 @@
 </br>
 
 <!-- Display the "Register a Topic" button only if the user has a supervisor or administrator role -->
-{% if user.role in ['supervisor', 'administrator'] %}
-<a href="{% url 'spmsapp:register_project_topic' %}" class="btn btn-primary">Register a Project Topic</a>
+{% if is_supervisor_or_admin %}
+    <a href="{% url 'spmsapp:register_project_topic' %}" class="btn btn-primary">Register a Project Topic</a>
 {% endif %}
 
 </br>

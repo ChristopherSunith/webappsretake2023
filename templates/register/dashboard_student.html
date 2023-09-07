@@ -16,6 +16,13 @@
 </br>
 </br>
 
+<!-- Inside dashboard_student.html -->
+<!-- Add a button to redirect to the project selection page -->
+<a href="{% url 'spmsapp:select_project' %}" class="btn btn-primary">Select a Project</a>
+
+</br>
+</br>
+
 <form method="post" action="{% url 'register:logout' %}">
     {% csrf_token %}
     <input type="submit" value="Logout">
