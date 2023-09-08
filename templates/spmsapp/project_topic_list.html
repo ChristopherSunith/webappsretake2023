@@ -7,7 +7,7 @@
 <h2>Project Topics</h2>
 <ul>
   {% for topic in project_topics %}
-  <li>{{ topic.name }}</li>
+  <li>{{ topic.name }} (Supervisor: {{ topic.supervisor.first_name }} {{ topic.supervisor.last_name }})</li>
   {% empty %}
   <li>No project topics available.</li>
   {% endfor %}

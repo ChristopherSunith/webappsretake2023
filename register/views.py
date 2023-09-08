@@ -7,13 +7,15 @@ from .models import User
 def registration(request):
     if request.method == 'POST':
         username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
         password = request.POST.get('password')
         role = request.POST.get('role')
 
         # Hash the password
         hashed_password = make_password(password)
 
-        user = User(username=username, password=hashed_password, role=role)
+        user = User(username=username, first_name=first_name, last_name=last_name, password=hashed_password, role=role)
         user.save()
         return redirect('register:login')
 

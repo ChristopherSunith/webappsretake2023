@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from .forms import ProjectTopicForm
 from .models import ProjectTopic
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required, login_required
 from django.shortcuts import render, redirect
 from .forms import ProjectSelectionForm
 from .models import ProjectSelection

@@ -1,11 +1,11 @@
-    {% extends "spmsapp/base.html" %}
+{% extends "spmsapp/base.html" %}
 
-    {% block content %}
-        <h2>Select a Project</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Select</button>
-        </form>
-        <a href="{% url 'spmsapp:project_topic_list' %}" class="btn btn-primary">Back to Project List</a>
-    {% endblock %}
+{% block content %}
+    <h2>Select a Project</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Select</button>
+    </form>
+    <a href="{% url 'spmsapp:project_topic_list' %}" class="btn btn-primary">Back to Project List</a>
+{% endblock %}

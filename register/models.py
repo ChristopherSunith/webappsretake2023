@@ -27,7 +27,9 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=50, unique=True)
-    password = models.CharField(max_length=100)  # You should use a hashed password in practice
+    first_name = models.CharField(max_length=30, default='')
+    last_name = models.CharField(max_length=30, default='')
+    password = models.CharField(max_length=100)  # hashed password is implemented in views
     role = models.CharField(max_length=20)  # Administrator, Supervisor, Student
 
     # Add the is_staff field
