@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Projects</title>
+</head>
+<body>
+<h2>My Projects</h2>
+<ul>
+    {% for project in accepted_projects %}
+        <li>{{ project.name }}</li>
+        {% empty %}
+        <li>No accepted projects available.</li>
+    {% endfor %}
+</ul>
+
+</br>
+</br>
+<!-- Button to go back to the dashboard -->
+<a href="{% url 'register:dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
+</body>
+</html>

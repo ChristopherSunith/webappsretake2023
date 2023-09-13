@@ -1,31 +1,38 @@
-{% extends "spmsapp/base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Selections</title>
+</head>
+<body>
+<h2>Manage Selections</h2>
 
-{% block content %}
-    <h2>Manage Project Selections</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Student</th>
-            <th>Selected Project</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for selection in selections %}
-            <tr>
-                <td>{{ selection.student }}</td>
-                <td>{{ selection.project }}</td>
-                <td>
-                    <a href="{% url 'spmsapp:accept_selection' selection.id %}" class="btn btn-success">Accept</a>
-                    <a href="{% url 'spmsapp:reject_selection' selection.id %}" class="btn btn-danger">Reject</a>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="3">No pending selections</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <a href="{% url 'spmsapp:project_list' %}" class="btn btn-primary">Back to Project List</a>
-{% endblock %}
+<!-- Display the list of pending project selections by students -->
+<ul>
+    {% for selection in selections %}
+        <li>
+            Student: {{ selection.student.username }}<br>
+            Project: {{ selection.project.name }}<br>
+            Status: {{ selection.status }}<br>
+
+            <!-- Add buttons or links for actions like "Accept" or "Reject" here -->
+            <form method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="selection_id" value="{{ selection.id }}">
+                <label for="action">Action:</label>
+                <select name="action" required>
+                    <option value="accept">Accept</option>
+                    <option value="reject">Reject</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </li>
+        {% empty %}
+        <li>No pending selections.</li>
+    {% endfor %}
+</ul>
+
+<!-- Add links or buttons for additional actions if needed -->
+
+<a href="{% url 'register:dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
+</body>
+</html>

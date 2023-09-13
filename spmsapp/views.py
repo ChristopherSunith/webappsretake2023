@@ -54,6 +54,7 @@ def select_project(request):
     return render(request, 'spmsapp/select_project.html', {'form': form})
 
 
+@login_required
 def manage_selections(request):
     # Get all project selections with status 'Pending' for the current supervisor
     selections = ProjectSelection.objects.filter(supervisor=request.user, status='Pending')
