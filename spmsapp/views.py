@@ -81,3 +81,10 @@ def manage_selections(request):
         form = ProjectSelectionForm()
 
     return render(request, 'spmsapp/manage_selections.html', {'selections': selections, 'form': form})
+
+
+def my_projects(request):
+    # Fetch accepted projects for the current student user
+    accepted_projects = ProjectSelection.objects.filter(student=request.user, status='Accepted')
+
+    return render(request, 'spmsapp/my_projects.html', {'accepted_projects': accepted_projects})
