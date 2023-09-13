@@ -56,29 +56,41 @@ def select_project(request):
 
 @login_required
 def manage_selections(request):
+    print("Manage Selections view accessed.")
     # Get all project selections with status 'Pending' for the current supervisor
     selections = ProjectSelection.objects.filter(supervisor=request.user, status='Pending')
 
+    # Retrieve the list of projects
+    projects = ProjectTopic.objects.all()
+
     if request.method == 'POST':
         # Handle the form submission for accepting/rejecting selections
+        print("Form submitted via POST method.")
         form = ProjectSelectionForm(request.POST)
         if form.is_valid():
-            selection_id = form.cleaned_data['selection_id']
-            selection = ProjectSelection.objects.get(id=selection_id)
-            action = form.cleaned_data['action']
+            for selection in selections:
+                action_key = f"action-{selection.id}"
+                project_key = f"project-{selection.id}"
 
-            # Check if the selection belongs to the current supervisor
-            if selection.supervisor == request.user:
-                if action == 'accept':
-                    selection.status = 'Accepted'
-                    selection.save()
-                elif action == 'reject':
-                    selection.status = 'Rejected'
-                    selection.save()
-            else:
-                return HttpResponse("Permission denied")
+                if action_key in form.cleaned_data and project_key in form.cleaned_data:
+                    action = form.cleaned_data[action_key]
+                    selected_project_id = form.cleaned_data[project_key]
 
+                    if action == 'accept':
+                        # Update the project for the selection
+                        selected_project = ProjectTopic.objects.get(id=selected_project_id)
+                        selection.project = selected_project
+                        selection.save()
+                    elif action == 'reject':
+                        selection.status = 'Rejected'
+                        selection.save()
+
+            # Redirect after processing the form
+            return redirect('spmsapp:manage_selections')
+        else:
+            # Print form errors
+            print("Form Errors:", form.errors)
     else:
         form = ProjectSelectionForm()
 
-    return render(request, 'spmsapp/manage_selections.html', {'selections': selections, 'form': form})
+    return render(request, 'spmsapp/manage_selections.html', {'selections': selections, 'form': form, 'projects': projects})

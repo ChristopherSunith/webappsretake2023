@@ -11,11 +11,10 @@
     {% for selection in selections %}
         <li>
             Student: {{ selection.student.username }}<br>
-            Project: {{ selection.project.name }}<br>
             Status: {{ selection.status }}<br>
 
             <!-- Add buttons or links for actions like "Accept" or "Reject" here -->
-            <form method="post" action="">
+            <form method="post" action="{% url 'spmsapp:manage_selections' %}">
                 {% csrf_token %}
                 <input type="hidden" name="selection_id" value="{{ selection.id }}">
                 <label for="action">Action:</label>
@@ -23,6 +22,15 @@
                     <option value="accept">Accept</option>
                     <option value="reject">Reject</option>
                 </select>
+
+                <!-- Dropdown list for project selection -->
+                <label for="project">Select Project:</label>
+                <select name="project" required>
+                    {% for project in projects %}
+                        <option value="{{ project.id }}">{{ project.name }}</option>
+                    {% endfor %}
+                </select>
+
                 <button type="submit">Submit</button>
             </form>
         </li>

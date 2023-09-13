@@ -36,4 +36,4 @@ class ProjectSelection(models.Model):
                               choices=[('Pending', 'Pending'), ('Accepted', 'Accepted'), ('Rejected', 'Rejected')])
 
     def __str__(self):
-        return f'{self.student} selected {self.project} proposed by {self.supervisor}'
+        return f'{self.student} selected {self.project} proposed by {self.supervisor} ({self.status})'
